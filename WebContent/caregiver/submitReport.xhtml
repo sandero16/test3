@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+
+	<title>
+		<ui:insert name="title">Submit Report</ui:insert>
+	</title>
+  
+	<f:metadata>
+		<f:viewParam name="task" value="#{taskController.task.id}" />
+		<f:viewAction action="#{taskController.findTask}" />
+	</f:metadata>
+	
+</h:head> 
+
+<h:body> 
+
+<div class="jumbotron jumbotron-sm">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-lg-12">
+                <h1 class="h1">
+                    Submit report <small></small></h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="well well-sm">
+            
+            <h:form id="taskForm">
+              	<div class="row">
+	                
+	                <div class="col-md-6">
+	              	
+		              	<div class="form-group">
+			    			<h:outputLabel value="Patient : "/>
+			    			<h:outputText class="form-control" id="name" value="#{taskController.task.patient.name}"/>
+		    			</div>
+		
+						<div class="form-group">
+			    			<h:outputLabel value="Description : "/>
+			  				<h:outputText class="form-control" id="email" value="#{taskController.task.description}"/>
+		  				</div>
+		
+						<div class="form-group">
+			    			<h:outputLabel value="Date : "/>
+			    			<h:outputText id="subject" name="subject" class="form-control" required="required" value="#{taskController.task.date}">
+			    				<f:convertDateTime pattern="dd-MM-yyyy"/>  
+			    			</h:outputText>
+		    			</div>
+	
+	                </div>
+	    			
+	    			<div class="col-md-6">
+	                <div class="form-group">
+			    		<h:outputLabel value="Report : "/>
+			    		<h:inputTextarea class="form-control" rows="9" cols="25" required="required"
+	                    	placeholder="Message" value="#{taskController.task.report}"/>
+	                </div>
+	                </div>
+	  			
+		  			<div class="col-md-12">
+			  			<h:commandButton value="Submit report" action="#{taskController.fileTaskReport()}" class="btn btn-primary pull-right"/>
+		            </div>
+		            
+            	</div>
+			</h:form>
+			
+            </div>
+        </div>
+    </div>
+</div>
+
+</h:body> 
+
+</html>

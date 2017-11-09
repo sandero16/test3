@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+
+	<title>
+		<ui:insert name="title">Task overview</ui:insert>
+	</title>
+</h:head> 
+
+<h:body> 
+
+	<div class="jumbotron jumbotron-sm">
+	    <div class="container">
+	        <div class="row">
+	            <div class="col-sm-12 col-lg-12">
+	                <h1 class="h1">
+	                    Open tasks <small></small></h1>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+
+	<div class="container">
+		<h:form>
+	    	<h:dataTable class="table table-striped custab" value="#{taskController.findIncompletedTasks()}" var="task">
+	    
+	    	<h:column>
+				<f:facet name="header">
+					<h:outputText value="ID" />
+				</f:facet>
+				<h:outputText value="#{task.id}" />
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Patient" />
+				</f:facet>
+				<h:outputText value="#{task.patient.name}" />
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Description" />
+				</f:facet>
+				<h:outputText value="#{task.description}" />
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Date" />
+				</f:facet>
+				<h:outputText value="#{task.date}" >
+					<f:convertDateTime pattern="dd-MM-yyyy"/>  
+				</h:outputText>
+			</h:column>
+				
+			<h:column>
+				<f:facet name="header">
+					<h:outputText class="text-center" value="Action" />
+				</f:facet>
+				<a class='btn btn-info btn-xs' href="submitReport.faces?task=#{task.id}"><span class="glyphicon glyphicon-edit"></span> Submit Report</a>
+			</h:column>
+	    
+	    	</h:dataTable>
+	    
+	    	<h:commandButton class='btn btn-info btn-xs' style="margin-left:15px;width:100px" action="#{userController.logout()}" value="Logout" />
+		
+		</h:form>
+	</div>
+
+</h:body> 
+
+</html>
